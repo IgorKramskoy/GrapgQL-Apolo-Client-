@@ -1,16 +1,6 @@
 import React from "react";
-import './styles.scss'
-import Location from "./components/Location/location";
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import TodoList from "./components/todoList/todoList";
-
-
-const client = new ApolloClient({
-    uri: 'https://flyby-router-demo.herokuapp.com/',
-    cache: new InMemoryCache(),
-});
-
-
+import './styles.scss'
 
 function App() {
   return (
@@ -19,9 +9,6 @@ function App() {
         ToDoList
       </h1>
         <TodoList/>
-        <ApolloProvider client={client}>
-          <Location/>
-        </ApolloProvider>
     </div>
   );
 }

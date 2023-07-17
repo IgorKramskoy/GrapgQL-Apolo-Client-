@@ -1,24 +1,19 @@
 import React from "react";
+import {useQuery} from "@apollo/client";
+import {ALL_TODO} from "../../apollo/todos";
 const TodoList = () => {
-    const todoList = [
-        {
-            text: "hdfj",
-            status: true
-        },
-        {
-            text: "dfdhdh",
-            status: false
-        },
-    ];
+    const {data, error, loading} = useQuery(ALL_TODO)
 
+    if (error) return <h1>Error...</h1>
+    if (loading) return <h1>Lading...</h1>
 
     return <>
         <ul>
             {
-                todoList.length && todoList.map((item) =>
-                    <li key={item.text}>
-                        <input type='checkbox' checked={item.status}/>
-                        {item.text}
+                data.allTodos.length && data.allTodos.map((item) =>
+                    <li key={item.id}>
+                        <input type='checkbox' checked={item.completed}/>
+                        {item.title}
                     </li>
                 )
             }
